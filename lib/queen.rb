@@ -5,6 +5,8 @@ require_relative '../lib/string'
 
 # The queen playing piece
 class Queen < Piece
+  attr_accessor :piece_hash
+
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = 'Q'
@@ -12,11 +14,11 @@ class Queen < Piece
                     2 => '    \   /    ',
                     3 => '     \ /     ',
                     4 => '     | |     ',
-                    5 => '     | |     ',
-                    6 => '    /___\    ' }
+                    5 => '    /___\    ' }
+  end
+
+  def initial_adjacents(column, row)
+    [[column + 1, row + 1], [column + 1, row - 1], [column - 1, row + 1], [column - 1, row - 1],
+     [column, row + 1], [column, row - 1], [column + 1, row], [column - 1, row]]
   end
 end
-
-queen = Queen.new(1, :white, 1, [1, 1])
-
-6.times { |num| queen.draw(num + 1, :yellow) }
