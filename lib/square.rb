@@ -11,19 +11,19 @@ require_relative '../lib/rook'
 class Square
   attr_accessor :row, :column, :position, :piece
 
-  def initialize(column, row)
+  def initialize(column, row, piece)
     @row = row
     @column = column
     @position = [column, row]
     @bg_color = bg_color
-    @piece = Pawn.new(1, :white, 1, [1, 1])
+    @piece = piece
   end
 
   def draw(row_to_draw)
     bg_color_code = @bg_color == :yellow ? 43 : 42
 
     if piece.nil?
-      print "|#{'          '.colorize(bg_color_code).colorize(1)}"
+      print "|#{'             '.colorize(bg_color_code).colorize(1)}"
     else
       print "|#{draw_piece_row(row_to_draw, bg_color_code)}"
     end
