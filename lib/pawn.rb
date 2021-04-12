@@ -11,7 +11,6 @@ class Pawn < Piece
     super(player_num, color, piece_num, start_pos)
     @id = "P#{piece_num}"
     @first_move = true
-    @current_pos = start_pos
     @move_distance = player_num == 1 ? 2 : -2
     @piece_hash = { 1 => "       #{@id}",
                     2 => '         ',
