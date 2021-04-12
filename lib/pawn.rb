@@ -13,11 +13,10 @@ class Pawn < Piece
     @first_move = true
     @current_pos = start_pos
     @move_distance = player_num == 1 ? 2 : -2
-    @piece_hash = { 1 => "           #{@id}",
-                    2 => '     ___     ',
-                    3 => '    |___|    ',
-                    4 => '    /   \    ',
-                    5 => '   /_____\   ' }
+    @piece_hash = { 1 => "       #{@id}",
+                    2 => '         ',
+                    3 => '    O    ',
+                    4 => '   /_\   ' }
   end
 
   def initial_adjacents(column, row)

@@ -10,11 +10,10 @@ class King < Piece
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = 'K'
-    @piece_hash = { 1 => "   __+|+__  #{@id}",
-                    2 => '   \     /   ',
-                    3 => '    |   |    ',
-                    4 => '    _| |_    ',
-                    5 => '   /_____\   ' }
+    @piece_hash = { 1 => "  _+|+_ #{@id}",
+                    2 => '  \   /  ',
+                    3 => '   | |   ',
+                    4 => '  /___\  ' }
   end
 
   def initial_adjacents(column, row)

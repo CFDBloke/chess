@@ -25,7 +25,7 @@ class ChessBoard
   private
 
   def draw_row_top
-    print '+-------------'
+    print '+---------'
   end
 
   def draw_row_bottom
@@ -33,14 +33,14 @@ class ChessBoard
       print '         |'
       8.times do |num|
         draw_number_row(num + 1, row + 1)
-        print '    |'
+        print '|'
       end
       print "\n"
     end
   end
 
   def draw_board_row(row_number)
-    5.times do |row|
+    4.times do |row|
       draw_number_row(row_number + 1, row + 1)
       8.times do |column|
         @movement_controller.vertices.square(column + 1, row_number + 1).draw(row + 1)
@@ -51,14 +51,14 @@ class ChessBoard
 
   def draw_number_row(number, row)
     row = row.between?(5, 6) ? 5 : row
-    number_hash = { 1 => { 1 => '         ', 2 => '    |    ', 3 => '    |    ', 4 => '         ', 5 => '         ' },
-                    2 => { 1 => '   __    ', 2 => '   __|   ', 3 => '  |__    ', 4 => '         ', 5 => '         ' },
-                    3 => { 1 => '   __    ', 2 => '   __|   ', 3 => '   __|   ', 4 => '         ', 5 => '         ' },
-                    4 => { 1 => '         ', 2 => '  |__|   ', 3 => '     |   ', 4 => '         ', 5 => '         ' },
-                    5 => { 1 => '   __    ', 2 => '  |__    ', 3 => '   __|   ', 4 => '         ', 5 => '         ' },
-                    6 => { 1 => '   __    ', 2 => '  |__    ', 3 => '  |__|   ', 4 => '         ', 5 => '         ' },
-                    7 => { 1 => '   __    ', 2 => '     |   ', 3 => '     |   ', 4 => '         ', 5 => '         ' },
-                    8 => { 1 => '   __    ', 2 => '  |__|   ', 3 => '  |__|   ', 4 => '         ', 5 => '         ' } }
+    number_hash = { 1 => { 1 => '         ', 2 => '    |    ', 3 => '    |    ', 4 => '         ' },
+                    2 => { 1 => '   __    ', 2 => '   __|   ', 3 => '  |__    ', 4 => '         ' },
+                    3 => { 1 => '   __    ', 2 => '   __|   ', 3 => '   __|   ', 4 => '         ' },
+                    4 => { 1 => '         ', 2 => '  |__|   ', 3 => '     |   ', 4 => '         ' },
+                    5 => { 1 => '   __    ', 2 => '  |__    ', 3 => '   __|   ', 4 => '         ' },
+                    6 => { 1 => '   __    ', 2 => '  |__    ', 3 => '  |__|   ', 4 => '         ' },
+                    7 => { 1 => '   __    ', 2 => '     |   ', 3 => '     |   ', 4 => '         ' },
+                    8 => { 1 => '   __    ', 2 => '  |__|   ', 3 => '  |__|   ', 4 => '         ' } }
     print number_hash[number][row]
   end
 end

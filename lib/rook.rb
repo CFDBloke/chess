@@ -10,11 +10,10 @@ class Rook < Piece
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = "R#{piece_num}"
-    @piece_hash = { 1 => "           #{@id}",
-                    2 => '   n_n_n_n   ',
-                    3 => '   \     /   ',
-                    4 => '    |   |    ',
-                    5 => '   /_____\   ' }
+    @piece_hash = { 1 => "       #{@id}",
+                    2 => '  n_n_n  ',
+                    3 => '  \   /  ',
+                    4 => '  /___\  ' }
   end
 
   def initial_adjacents(column, row)

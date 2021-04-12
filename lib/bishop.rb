@@ -10,11 +10,10 @@ class Bishop < Piece
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = "B#{piece_num}"
-    @piece_hash = { 1 => "           #{@id}",
-                    2 => '      O      ',
-                    3 => '     ( )     ',
-                    4 => '     \ /     ',
-                    5 => '    /___\    ' }
+    @piece_hash = { 1 => "    O  #{@id}",
+                    2 => '   ( )   ',
+                    3 => '   \ /   ',
+                    4 => '  /___\  ' }
   end
 
   def initial_adjacents(column, row)

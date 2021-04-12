@@ -10,11 +10,10 @@ class Knight < Piece
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = "N#{piece_num}"
-    @piece_hash = { 1 => "           #{@id}",
-                    2 => '    /\__     ',
-                    3 => '   /    )    ',
-                    4 => '  /__/)  )   ',
-                    5 => '     /____\  ' }
+    @piece_hash = { 1 => "       #{@id}",
+                    2 => '   /\_   ',
+                    3 => '  /_/ )  ',
+                    4 => '   /___) ' }
   end
 
   private
