@@ -22,55 +22,20 @@ class Player
   private
 
   def generate_pieces
-    generate_bishops
-    generate_king
-    generate_knights
-    generate_pawns
-    generate_queen
-    generate_rooks
-  end
-
-  def generate_bishops
-    start_positions = @number == 1 ? [[3, 8], [6, 8]] : [[3, 1], [6, 1]]
-    2.times do |piece_num|
-      new_bishop = Bishop.new(@number, @color, piece_num + 1, start_positions[piece_num])
-      @pieces[new_bishop.id] = new_bishop
-    end
-  end
-
-  def generate_king
-    start_position = @number == 1 ? [5, 8] : [5, 1]
-    king = King.new(@number, @color, 1, start_position)
-    @pieces[king.id] = king
-  end
-
-  def generate_knights
-    start_positions = @number == 1 ? [[2, 8], [7, 8]] : [[2, 1], [7, 1]]
-    2.times do |piece_num|
-      new_knight = Knight.new(@number, @color, piece_num + 1, start_positions[piece_num])
-      @pieces[new_knight.id] = new_knight
-    end
-  end
-
-  def generate_pawns
     start_row = @number == 1 ? 7 : 2
-    8.times do |piece_num|
-      new_pawn = Pawn.new(@number, @color, piece_num + 1, [piece_num + 1, start_row])
-      @pieces[new_pawn.id] = new_pawn
-    end
+    generate_piece_types(Pawn, start_row, [1, 2, 3, 4, 5, 6, 7, 8])
+    start_row = @number == 1 ? 8 : 1
+    generate_piece_types(Bishop, start_row, [3, 6])
+    generate_piece_types(King, start_row, [5])
+    generate_piece_types(Knight, start_row, [2, 7])
+    generate_piece_types(Queen, start_row, [4])
+    generate_piece_types(Rook, start_row, [1, 8])
   end
 
-  def generate_queen
-    start_position = @number == 1 ? [4, 8] : [4, 1]
-    queen = Queen.new(@number, @color, 1, start_position)
-    @pieces[queen.id] = queen
-  end
-
-  def generate_rooks
-    start_positions = @number == 1 ? [[1, 8], [8, 8]] : [[1, 1], [8, 1]]
-    2.times do |piece_num|
-      new_rook = Rook.new(@number, @color, piece_num + 1, start_positions[piece_num])
-      @pieces[new_rook.id] = new_rook
+  def generate_piece_types(piece_class, start_row, columns)
+    columns.length.times do |piece_num|
+      new_piece = piece_class.new(@number, @color, piece_num + 1, [columns[piece_num], start_row])
+      @pieces[new_piece.id] = new_piece
     end
   end
 end
