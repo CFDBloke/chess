@@ -11,7 +11,7 @@ require_relative '../lib/rook'
 class Square
   attr_accessor :row, :column, :position, :piece
 
-  def initialize(column, row, piece)
+  def initialize(column, row, piece = nil)
     @row = row
     @column = column
     @position = [column, row]

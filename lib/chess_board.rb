@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../lib/vertex_list'
+require_relative '../lib/movement_controller'
 
 # The class for displaying the chessboard
 class ChessBoard
   def initialize
-    @vertices = VertexList.new
+    @movement_controller = MovementController.new
     draw
   end
 
@@ -43,7 +43,7 @@ class ChessBoard
     5.times do |row|
       draw_number_row(row_number + 1, row + 1)
       8.times do |column|
-        @vertices.square(column + 1, row_number + 1).draw(row + 1)
+        @movement_controller.vertices.square(column + 1, row_number + 1).draw(row + 1)
       end
       print "|\n"
     end

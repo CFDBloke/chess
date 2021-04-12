@@ -5,12 +5,13 @@ require_relative '../lib/string'
 
 # The pawn playing piece
 class Pawn < Piece
-  attr_accessor :piece_hash
+  attr_accessor :id, :piece_hash
 
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = "P#{piece_num}"
     @first_move = true
+    @current_pos = start_pos
     @move_distance = player_num == 1 ? 2 : -2
     @piece_hash = { 1 => "           #{@id}",
                     2 => '     ___     ',
@@ -20,10 +21,10 @@ class Pawn < Piece
   end
 
   def initial_adjacents(column, row)
-    if @first_move
-      [[column, row + (@move_distance - 1)], [column, row + @move_distance]]
+    if @player_num == 1
+      [column, row - 1]
     else
-      [[column, row + @move_distance]]
+      [column, row + 1]
     end
   end
 end

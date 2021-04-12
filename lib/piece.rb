@@ -2,7 +2,7 @@
 
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
-  attr_accessor :adjacents
+  attr_accessor :current_pos, :adjacents
 
   def initialize(player_num, color, piece_num, start_pos)
     @player_num = player_num

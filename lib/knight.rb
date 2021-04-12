@@ -5,7 +5,7 @@ require_relative '../lib/string'
 
 # The knight playing piece
 class Knight < Piece
-  attr_accessor :piece_hash
+  attr_accessor :id, :piece_hash
 
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
