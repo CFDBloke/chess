@@ -17,16 +17,23 @@ class MovementController
   def move_piece(player_num, input_string)
     input_array = input_string.split(',')
 
+    target_pos = [input_array[1].to_i, input_array[2].to_i]
+
     piece_to_move = get_piece(player_num, input_array[0])
 
     clear_square(piece_to_move.current_pos)
 
-    piece_to_move.current_pos = [input_array[1].to_i, input_array[2].to_i]
+    piece_to_move.current_pos = target_pos
 
     update_square(piece_to_move)
   end
 
   private
+
+  def move_legal?
+    piece_to_move.move_to(target_pos[0], target_pos[1], @vertices)
+  end
+
 
   def clear_square(sqr)
     @vertices.square(sqr[0], sqr[1]).piece = nil

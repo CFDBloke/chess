@@ -58,7 +58,7 @@ class VertexList
     return prev if queue.empty?
 
     node = queue.shift
-    neighbours = @vertex_array[node].adjacents
+    neighbours = @vertex_array[node].piece.adjacents
     neighbours.each do |neighbour|
       next if visited[neighbour]
 
@@ -78,6 +78,7 @@ class VertexList
 
   def index_adjacents
     @vertex_array.each do |square|
+      p 'Hello!'
       next if square.piece.nil?
 
       square.piece.adjacents = square.piece.adjacents.map do |position|
