@@ -2,7 +2,7 @@
 
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
-  attr_reader :current_pos
+  attr_reader :player_num, :current_pos
   attr_accessor :adjacents
 
   def initialize(player_num, color, piece_num, start_pos)
@@ -23,7 +23,27 @@ class Piece
     @current_pos = pos
   end
 
-  private
+  # protected
+
+  def target_on_vertical_axis?(target_column)
+    @current_pos[0] == target_column
+  end
+
+  def target_on_horizontal_axis?(target_row)
+    @current_pos[1] == target_row
+  end
+
+  def target_on_diagonal_axis?(target_column, target_row)
+    (@current_pos[0] - target_column).abs == (@current_pos[1] - target_row).abs
+  end
+
+  def friendly_target?(target_column, target_row, vertices)
+    return false if vertices.square(target_column, target_row).piece.nil?
+
+    vertices.square(target_column, target_row).piece.player_num == @player_num
+  end
+
+  # private
 
   def find_adjacents(column, row)
     adjacents = initial_adjacents(column, row)

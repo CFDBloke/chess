@@ -20,4 +20,17 @@ class Queen < Piece
     [[column + 1, row + 1], [column + 1, row - 1], [column - 1, row + 1], [column - 1, row - 1],
      [column, row + 1], [column, row - 1], [column + 1, row], [column - 1, row]]
   end
+
+  def move_to(target_column, target_row, vertices)
+    return :invalid unless target_on_axis?(target_column, target_row)
+
+    return :friendly unless friendly_target?(target_column, target_row, vertices)
+  end
+
+  # private
+
+  def target_on_axis?(target_column, target_row)
+    target_on_vertical_axis?(target_column) || target_on_horizontal_axis?(target_row) ||
+      target_on_diagonal_axis?(target_column, target_row)
+  end
 end
