@@ -7,8 +7,8 @@ class ChessBoard
   def initialize
     @movement_controller = MovementController.new
     draw
-    # @movement_controller.move_piece(1, 'Q, 8, 4')
-    # draw
+    @movement_controller.move_piece(1, 'Q, 8, 4')
+    draw
   end
 
   def draw

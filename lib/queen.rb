@@ -24,10 +24,20 @@ class Queen < Piece
   def move_to(target_column, target_row, vertices)
     return :invalid unless target_on_axis?(target_column, target_row)
 
-    return :friendly unless friendly_target?(target_column, target_row, vertices)
+    return :friendly if friendly_target?(target_column, target_row, vertices)
+
+    return :obstructed if obstructed?(target_column, target_row, vertices)
   end
 
   # private
+
+  def obstructed?(target_column, target_row, vertices)
+    vertices.index_adjacents
+
+    path = vertices.breadth_first_search(@current_pos, [target_column, target_row])
+
+    p path
+  end
 
   def target_on_axis?(target_column, target_row)
     target_on_vertical_axis?(target_column) || target_on_horizontal_axis?(target_row) ||

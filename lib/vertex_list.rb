@@ -36,6 +36,16 @@ class VertexList
     reconstruct_path(start_pos_index, end_pos_index, prev)
   end
 
+  def index_adjacents
+    @vertex_array.each do |square|
+      next if square.piece.nil?
+
+      square.piece.adjacents = square.piece.adjacents.map do |position|
+        @vertex_array.index { |sq| sq.position == position }
+      end
+    end
+  end
+
   private
 
   def solve(start)
@@ -58,6 +68,7 @@ class VertexList
     return prev if queue.empty?
 
     node = queue.shift
+
     neighbours = @vertex_array[node].piece.adjacents
     neighbours.each do |neighbour|
       next if visited[neighbour]
@@ -74,16 +85,5 @@ class VertexList
 
     path.push(node)
     add_to_path(path, prev[node], prev)
-  end
-
-  def index_adjacents
-    @vertex_array.each do |square|
-      p 'Hello!'
-      next if square.piece.nil?
-
-      square.piece.adjacents = square.piece.adjacents.map do |position|
-        @vertex_array.index { |sq| sq.position == position }
-      end
-    end
   end
 end

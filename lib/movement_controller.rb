@@ -21,6 +21,8 @@ class MovementController
 
     piece_to_move = get_piece(player_num, input_array[0])
 
+    piece_to_move.move_to(target_pos[0], target_pos[1], @vertices)
+
     clear_square(piece_to_move.current_pos)
 
     piece_to_move.current_pos = target_pos
