@@ -10,6 +10,7 @@ class Knight < Piece
   def initialize(player_num, color, piece_num, start_pos, can_jump)
     super(player_num, color, piece_num, start_pos, can_jump)
     @id = "N#{piece_num}"
+    @move_distance = :unlimited
     @piece_hash = { 1 => "       #{@id}",
                     2 => '   /\_   ',
                     3 => '  /_/ )  ',

@@ -26,7 +26,7 @@ class Player
     # generate_piece_types(Pawn, start_row, [1, 2, 3, 4, 5, 6, 7, 8])
     start_row = @number == 1 ? 8 : 1
     generate_piece_types(Bishop, start_row, [3, 6])
-    # generate_piece_types(King, start_row, [5])
+    generate_piece_types(King, start_row, [5])
     generate_piece_types(Knight, start_row, [2, 7], can_jump: true)
     generate_piece_types(Queen, start_row, [4])
     generate_piece_types(Rook, start_row, [1, 8])
