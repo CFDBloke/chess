@@ -31,8 +31,10 @@ class Queen < Piece
 
   # private
 
-  def obstructed?(target_column, target_row, vertices)
-    
+  def obstructed?(target_column, target_row, squares)
+    direction = movement_direction(target_column, target_row)
+
+    path = find_path(target_column, target_row, direction)
   end
 
   def target_on_axis?(target_column, target_row)
