@@ -28,7 +28,7 @@ class Queen < Piece
 
     return :obstructed if obstructed?(target_column, target_row, vertices)
 
-    p 'Path not obstructed'
+    :allow_move
   end
 
   # private

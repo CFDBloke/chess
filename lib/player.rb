@@ -22,8 +22,8 @@ class Player
   private
 
   def generate_pieces
-    start_row = @number == 1 ? 7 : 2
-    generate_piece_types(Pawn, start_row, [1, 2, 3, 4, 5, 6, 7, 8])
+    # start_row = @number == 1 ? 7 : 2
+    # generate_piece_types(Pawn, start_row, [1, 2, 3, 4, 5, 6, 7, 8])
     start_row = @number == 1 ? 8 : 1
     # generate_piece_types(Bishop, start_row, [3, 6])
     # generate_piece_types(King, start_row, [5])

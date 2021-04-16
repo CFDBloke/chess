@@ -21,7 +21,7 @@ class MovementController
 
     piece_to_move = get_piece(player_num, input_array[0])
 
-    piece_to_move.move_to(target_pos[0], target_pos[1], @squares)
+    return :no_move unless move_legal?(piece_to_move, target_pos)
 
     clear_square(piece_to_move.current_pos)
 
@@ -32,8 +32,24 @@ class MovementController
 
   private
 
-  def move_legal?
-    piece_to_move.move_to(target_pos[0], target_pos[1], @squares)
+  def move_legal?(piece_to_move, target_pos)
+    move_status = piece_to_move.move_to(target_pos[0], target_pos[1], @squares)
+
+    return true if move_status == :allow_move
+
+    move_error(move_status)
+    false
+  end
+
+  def move_error(move_status)
+    case move_status
+    when :invalid
+      puts 'That piece cannot move to that position in one move, please try again'
+    when :friendly
+      puts 'One of your own pieces is already at that location, please try again'
+    when :obstructed
+      puts 'The path to that position is obstructed by another playing piece, please try again'
+    end
   end
 
   def clear_square(sqr)
