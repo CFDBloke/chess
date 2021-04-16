@@ -27,15 +27,11 @@ class Queen < Piece
     return :friendly if friendly_target?(target_column, target_row, vertices)
 
     return :obstructed if obstructed?(target_column, target_row, vertices)
+
+    p 'Path not obstructed'
   end
 
   # private
-
-  def obstructed?(target_column, target_row, squares)
-    direction = movement_direction(target_column, target_row)
-
-    path = find_path(target_column, target_row, direction)
-  end
 
   def target_on_axis?(target_column, target_row)
     target_on_vertical_axis?(target_column) || target_on_horizontal_axis?(target_row) ||

@@ -43,6 +43,18 @@ class Piece
     squares.square(target_column, target_row).piece.player_num == @player_num
   end
 
+  def obstructed?(target_column, target_row, squares)
+    direction = movement_direction(target_column, target_row)
+
+    path = find_path(target_column, target_row, direction)
+
+    path = path.map { |position| !squares.square(position[0], position[1]).piece.nil? }
+
+    path.any?(true)
+  end
+
+  # private
+
   def movement_direction(target_column, target_row)
     if target_on_vertical_axis?(target_column)
       target_row < @current_pos[1] ? :North : :South
@@ -60,8 +72,6 @@ class Piece
     path = []
     extract_path(target_column, target_row, path_direction, @current_pos, path)
   end
-
-  # private
 
   def extract_path(target_column, target_row, path_direction, current_pos, path)
     next_pos_column = current_pos[0] + path_direction[0]
