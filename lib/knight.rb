@@ -7,8 +7,8 @@ require_relative '../lib/string'
 class Knight < Piece
   attr_accessor :id, :piece_hash
 
-  def initialize(player_num, color, piece_num, start_pos)
-    super(player_num, color, piece_num, start_pos)
+  def initialize(player_num, color, piece_num, start_pos, can_jump)
+    super(player_num, color, piece_num, start_pos, can_jump)
     @id = "N#{piece_num}"
     @piece_hash = { 1 => "       #{@id}",
                     2 => '   /\_   ',
@@ -16,10 +16,12 @@ class Knight < Piece
                     4 => '   /___) ' }
   end
 
-  private
+  # private
 
-  def initial_adjacents(column, row)
-    [[column + 2, row + 1], [column + 2, row - 1], [column + 1, row + 2], [column + 1, row - 2],
-     [column - 2, row + 1], [column - 2, row - 1], [column - 1, row + 2], [column - 1, row - 2]]
+  def target_on_axis?(target_column, target_row)
+    column_diff = (@current_pos[0] - target_column).abs
+    row_diff = (@current_pos[1] - target_row).abs
+
+    column_diff == 2 && row_diff == 1 || column_diff == 1 && row_diff == 2
   end
 end

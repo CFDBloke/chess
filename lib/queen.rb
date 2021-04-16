@@ -7,8 +7,8 @@ require_relative '../lib/string'
 class Queen < Piece
   attr_accessor :id, :piece_hash
 
-  def initialize(player_num, color, piece_num, start_pos)
-    super(player_num, color, piece_num, start_pos)
+  def initialize(player_num, color, piece_num, start_pos, can_jump)
+    super(player_num, color, piece_num, start_pos, can_jump)
     @id = 'Q'
     @move_distance = :unlimited
     @piece_hash = { 1 => "  _/O\\_ #{@id}",
