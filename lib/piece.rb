@@ -2,25 +2,19 @@
 
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
-  attr_reader :player_num, :current_pos
-  attr_accessor :adjacents
+  attr_reader :player_num
+  attr_accessor :adjacents, :current_pos
 
-  def initialize(player_num, color, piece_num, start_pos)
+  def initialize(player_num, color, piece_num, start_pos, can_jump: false)
     @player_num = player_num
     @color = color
-    @adjacents = []
-    @current_pos = []
-    self.current_pos = start_pos
+    @can_jump = can_jump
+    @current_pos = start_pos
     @piece_num = piece_num
   end
 
   def color_code
     @color == :white ? 39 : 30
-  end
-
-  def current_pos=(pos)
-    @adjacents = find_adjacents(pos[0], pos[1])
-    @current_pos = pos
   end
 
   # protected
@@ -34,8 +28,27 @@ class Piece
   end
 
   def target_on_diagonal_axis?(target_column, target_row)
+    p @current_pos[0]
+    p target_column
+    p (@current_pos[0] - target_column).abs
+    
+    p @current_pos[1]
+    p target_row
+    p (@current_pos[1] - target_row).abs
     (@current_pos[0] - target_column).abs == (@current_pos[1] - target_row).abs
   end
+
+  def move_to(target_column, target_row, squares)
+    return :invalid unless target_on_axis?(target_column, target_row)
+
+    return :friendly if friendly_target?(target_column, target_row, squares)
+
+    return :obstructed if obstructed?(target_column, target_row, squares)
+
+    :allow_move
+  end
+
+  # private
 
   def friendly_target?(target_column, target_row, squares)
     return false if squares.square(target_column, target_row).piece.nil?
@@ -52,8 +65,6 @@ class Piece
 
     path.any?(true)
   end
-
-  # private
 
   def movement_direction(target_column, target_row)
     if target_on_vertical_axis?(target_column)

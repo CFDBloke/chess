@@ -16,21 +16,6 @@ class Queen < Piece
                     4 => '  /___\  ' }
   end
 
-  def initial_adjacents(column, row)
-    [[column + 1, row + 1], [column + 1, row - 1], [column - 1, row + 1], [column - 1, row - 1],
-     [column, row + 1], [column, row - 1], [column + 1, row], [column - 1, row]]
-  end
-
-  def move_to(target_column, target_row, vertices)
-    return :invalid unless target_on_axis?(target_column, target_row)
-
-    return :friendly if friendly_target?(target_column, target_row, vertices)
-
-    return :obstructed if obstructed?(target_column, target_row, vertices)
-
-    :allow_move
-  end
-
   # private
 
   def target_on_axis?(target_column, target_row)

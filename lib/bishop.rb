@@ -16,7 +16,9 @@ class Bishop < Piece
                     4 => '  /___\  ' }
   end
 
-  def initial_adjacents(column, row)
-    [[column + 1, row + 1], [column + 1, row - 1], [column - 1, row + 1], [column - 1, row - 1]]
+  private
+
+  def target_on_axis?(target_column, target_row)
+    target_on_diagonal_axis?(target_column, target_row)
   end
 end
