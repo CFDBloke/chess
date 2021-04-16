@@ -4,7 +4,7 @@ require_relative '../lib/square'
 require_relative '../lib/piece'
 
 # The list of squares on the chessboard
-class VertexList
+class SquareController
   attr_reader :vertex_array
 
   def initialize
