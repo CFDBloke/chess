@@ -37,8 +37,8 @@ class Piece
     (@current_pos[0] - target_column).abs == (@current_pos[1] - target_row).abs
   end
 
-  def friendly_target?(target_column, target_row, vertices)
-    return false if vertices.square(target_column, target_row).piece.nil?
+  def friendly_target?(target_column, target_row, squares)
+    return false if squares.square(target_column, target_row).piece.nil?
 
     vertices.square(target_column, target_row).piece.player_num == @player_num
   end

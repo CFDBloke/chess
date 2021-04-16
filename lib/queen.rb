@@ -32,11 +32,7 @@ class Queen < Piece
   # private
 
   def obstructed?(target_column, target_row, vertices)
-    vertices.index_adjacents
-
-    path = vertices.breadth_first_search(@current_pos, [target_column, target_row])
-
-    p path
+    
   end
 
   def target_on_axis?(target_column, target_row)

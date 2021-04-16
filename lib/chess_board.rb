@@ -45,7 +45,7 @@ class ChessBoard
     4.times do |row|
       draw_number_row(row_number + 1, row + 1)
       8.times do |column|
-        @movement_controller.vertices.square(column + 1, row_number + 1).draw(row + 1)
+        @movement_controller.squares.square(column + 1, row_number + 1).draw(row + 1)
       end
       print "|\n"
     end

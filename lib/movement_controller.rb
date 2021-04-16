@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative '../lib/vertex_list'
+require_relative '../lib/square_controller'
 require_relative '../lib/player'
 
 # Controls the movement of all of the pieces on the chess board
 class MovementController
-  attr_accessor :vertices
+  attr_accessor :squares
 
   def initialize
-    @vertices = VertexList.new
+    @squares = SquareController.new
     @player1 = Player.new(1)
     @player2 = Player.new(2)
     setup_board
@@ -21,7 +21,7 @@ class MovementController
 
     piece_to_move = get_piece(player_num, input_array[0])
 
-    piece_to_move.move_to(target_pos[0], target_pos[1], @vertices)
+    piece_to_move.move_to(target_pos[0], target_pos[1], @squares)
 
     clear_square(piece_to_move.current_pos)
 
@@ -33,16 +33,15 @@ class MovementController
   private
 
   def move_legal?
-    piece_to_move.move_to(target_pos[0], target_pos[1], @vertices)
+    piece_to_move.move_to(target_pos[0], target_pos[1], @squares)
   end
 
-
   def clear_square(sqr)
-    @vertices.square(sqr[0], sqr[1]).piece = nil
+    @squares.square(sqr[0], sqr[1]).piece = nil
   end
 
   def update_square(piece)
-    @vertices.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
+    @squares.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
   end
 
   def setup_board
@@ -52,7 +51,7 @@ class MovementController
 
   def setup_pieces(player)
     player.pieces.each do |_key, piece|
-      @vertices.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
+      @squares.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
     end
   end
 
