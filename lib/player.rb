@@ -27,14 +27,14 @@ class Player
     start_row = @number == 1 ? 8 : 1
     generate_piece_types(Bishop, start_row, [3, 6])
     # generate_piece_types(King, start_row, [5])
-    # generate_piece_types(Knight, start_row, [2, 7])
+    generate_piece_types(Knight, start_row, [2, 7], can_jump: true)
     generate_piece_types(Queen, start_row, [4])
     generate_piece_types(Rook, start_row, [1, 8])
   end
 
-  def generate_piece_types(piece_class, start_row, columns)
+  def generate_piece_types(piece_class, start_row, columns, can_jump: false)
     columns.length.times do |piece_num|
-      new_piece = piece_class.new(@number, @color, piece_num + 1, [columns[piece_num], start_row])
+      new_piece = piece_class.new(@number, @color, piece_num + 1, [columns[piece_num], start_row], can_jump)
       @pieces[new_piece.id] = new_piece
     end
   end

@@ -5,7 +5,7 @@ class Piece
   attr_reader :player_num
   attr_accessor :adjacents, :current_pos
 
-  def initialize(player_num, color, piece_num, start_pos, can_jump: false)
+  def initialize(player_num, color, piece_num, start_pos, can_jump)
     @player_num = player_num
     @color = color
     @can_jump = can_jump
@@ -38,7 +38,7 @@ class Piece
 
     return :friendly if friendly_target?(target_column, target_row, squares)
 
-    return :obstructed if obstructed?(target_column, target_row, squares)
+    return :obstructed if obstructed?(target_column, target_row, squares) && !can_jump
 
     :allow_move
   end

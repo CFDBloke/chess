@@ -7,8 +7,8 @@ require_relative '../lib/string'
 class Bishop < Piece
   attr_accessor :id, :piece_hash
 
-  def initialize(player_num, color, piece_num, start_pos)
-    super(player_num, color, piece_num, start_pos)
+  def initialize(player_num, color, piece_num, start_pos, can_jump)
+    super(player_num, color, piece_num, start_pos, can_jump)
     @id = "B#{piece_num}"
     @move_distance = :unlimited
     @piece_hash = { 1 => "    O  #{@id}",
