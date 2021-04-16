@@ -38,7 +38,7 @@ class Piece
 
     return :friendly if friendly_target?(target_column, target_row, squares)
 
-    return :obstructed if obstructed?(target_column, target_row, squares) && !can_jump
+    return :obstructed if !@can_jump && obstructed?(target_column, target_row, squares)
 
     :allow_move
   end
