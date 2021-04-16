@@ -10,13 +10,17 @@ class Rook < Piece
   def initialize(player_num, color, piece_num, start_pos)
     super(player_num, color, piece_num, start_pos)
     @id = "R#{piece_num}"
+    @move_distance = :unlimited
     @piece_hash = { 1 => "       #{@id}",
                     2 => '  n_n_n  ',
                     3 => '  \   /  ',
                     4 => '  /___\  ' }
   end
 
-  def initial_adjacents(column, row)
-    [[column, row + 1], [column, row - 1], [column + 1, row], [column - 1, row]]
+  private
+
+  def target_on_axis?(target_column, target_row)
+    target_on_vertical_axis?(target_column) || target_on_horizontal_axis?(target_row) ||
+      target_on_diagonal_axis?(target_column, target_row)
   end
 end

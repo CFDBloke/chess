@@ -28,18 +28,13 @@ class Piece
   end
 
   def target_on_diagonal_axis?(target_column, target_row)
-    p @current_pos[0]
-    p target_column
-    p (@current_pos[0] - target_column).abs
-    
-    p @current_pos[1]
-    p target_row
-    p (@current_pos[1] - target_row).abs
     (@current_pos[0] - target_column).abs == (@current_pos[1] - target_row).abs
   end
 
   def move_to(target_column, target_row, squares)
-    return :invalid unless target_on_axis?(target_column, target_row)
+    return :invalid unless on_board?(target_column, target_row)
+
+    return :no_axis unless target_on_axis?(target_column, target_row)
 
     return :friendly if friendly_target?(target_column, target_row, squares)
 
@@ -49,6 +44,10 @@ class Piece
   end
 
   # private
+
+  def on_board?(target_column, target_row)
+    target_column.between?(1, 8) && target_row.between?(1, 8)
+  end
 
   def friendly_target?(target_column, target_row, squares)
     return false if squares.square(target_column, target_row).piece.nil?

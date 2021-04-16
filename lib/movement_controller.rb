@@ -44,6 +44,8 @@ class MovementController
   def move_error(move_status)
     case move_status
     when :invalid
+      puts 'You appear to have chosen a target that doesn\'t exist on the game board, please try again'
+    when :no_axis
       puts 'That piece cannot move to that position in one move, please try again'
     when :friendly
       puts 'One of your own pieces is already at that location, please try again'
