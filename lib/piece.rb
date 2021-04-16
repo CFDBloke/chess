@@ -36,6 +36,8 @@ class Piece
 
     return :no_axis unless target_on_axis?(target_column, target_row)
 
+    return :too_far unless in_range?(target_column, target_row)
+
     return :friendly if friendly_target?(target_column, target_row, squares)
 
     return :obstructed if !@can_jump && obstructed?(target_column, target_row, squares)
@@ -47,6 +49,12 @@ class Piece
 
   def on_board?(target_column, target_row)
     target_column.between?(1, 8) && target_row.between?(1, 8)
+  end
+
+  def in_range?(target_column, target_row)
+    return true if @move_distance == :unlimited
+
+    (@current_pos[0] - target_column).abs <= @move_distance && (@current_pos[1] - target_row).abs <= @move_distance
   end
 
   def friendly_target?(target_column, target_row, squares)

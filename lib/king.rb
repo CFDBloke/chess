@@ -7,17 +7,20 @@ require_relative '../lib/string'
 class King < Piece
   attr_accessor :id, :piece_hash
 
-  def initialize(player_num, color, piece_num, start_pos)
-    super(player_num, color, piece_num, start_pos)
+  def initialize(player_num, color, piece_num, start_pos, can_jump)
+    super(player_num, color, piece_num, start_pos, can_jump)
     @id = 'K'
+    @move_distance = 1
     @piece_hash = { 1 => "  _+|+_ #{@id}",
                     2 => '  \   /  ',
                     3 => '   | |   ',
                     4 => '  /___\  ' }
   end
 
-  def initial_adjacents(column, row)
-    [[column + 1, row + 1], [column + 1, row - 1], [column - 1, row + 1], [column - 1, row - 1],
-     [column, row + 1], [column, row - 1], [column + 1, row], [column - 1, row]]
+  # private
+
+  def target_on_axis?(target_column, target_row)
+    target_on_vertical_axis?(target_column) || target_on_horizontal_axis?(target_row) ||
+      target_on_diagonal_axis?(target_column, target_row)
   end
 end
