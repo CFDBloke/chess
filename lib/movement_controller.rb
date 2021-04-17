@@ -47,7 +47,10 @@ class MovementController
       no_axis: 'That piece cannot move to that position in one move, please try again',
       too_far: 'That piece cannot move that far, please try again',
       friendly: 'One of your own pieces is already at that location, please try again',
-      obstructed: 'The path to that position is obstructed by one or more other playing pieces, please try again'
+      obstructed: 'The path to that position is obstructed by one or more other playing pieces, please try again',
+      wrong_direction: 'The pawn cannot move backwards, please try again',
+      no_attack: 'The pawn cannot attack a piece that is directly ahead of it, please try again',
+      no_foe: 'The pawn cannot move diagonally unless it is attacking an opposing piece, please try again'
     }
     puts error_messages[move_status]
   end
