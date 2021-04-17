@@ -12,11 +12,14 @@ class Player
   attr_accessor :pieces
 
   def initialize(number)
-    @name = 'Bob'
     @number = number
     @color = @number == 1 ? :white : :black
     @pieces = {}
     generate_pieces
+  end
+
+  def delete_piece(dead_piece)
+    @pieces[dead_piece.id].delete
   end
 
   private

@@ -59,8 +59,22 @@ class MovementController
     @squares.square(sqr[0], sqr[1]).piece = nil
   end
 
-  def update_square(piece)
-    @squares.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
+  def update_square(predator_piece)
+    target_column = predator_piece.current_pos[0]
+    target_row = predator_piece.current_pos[1]
+    
+    prey_piece = @squares.square(target_column, target_row).piece
+
+    determine_victim(predator_piece, prey_piece) unless prey_piece.nil?
+
+    @squares.square(target_column, target_row).piece = predator_piece
+  end
+
+  def determine_victim(predator_piece, prey_piece)
+    victim_player = prey_piece.player_num == 1 ? @player1 : @player2
+    victim_player.delete_piece(prey_piece)
+    puts "Player #{predator_piece.player_num}'s '#{predator_piece.id}' piece just took player "\
+         "#{prey_piece.player_num}'s '#{prey_piece.id}'"
   end
 
   def setup_board
