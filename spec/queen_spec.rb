@@ -5,8 +5,8 @@
 require_relative '../lib/queen'
 
 describe Queen do
-  subject(:player1_queen) { described_class.new(1, :white, 1, [4, 8]) }
-  subject(:player2_queen) { described_class.new(2, :black, 1, [4, 1]) }
+  subject(:player1_queen) { described_class.new(1, :white, 1, [4, 8], false) }
+  let(:player2_queen) { described_class.new(2, :black, 1, [4, 1],false) }
 
   it 'has been instantiated' do
     expect(player1_queen).to be_a(Queen)
