@@ -4,11 +4,10 @@ require_relative '../lib/movement_controller'
 
 # The class for displaying the chessboard
 class ChessBoard
+  attr_reader :movement_controller
+
   def initialize
     @movement_controller = MovementController.new
-    draw
-    @movement_controller.move_piece(1, 'P3, 4, 6')
-    draw
   end
 
   def draw
@@ -64,5 +63,3 @@ class ChessBoard
     print number_hash[number][row]
   end
 end
-
-ChessBoard.new

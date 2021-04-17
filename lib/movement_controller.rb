@@ -5,12 +5,13 @@ require_relative '../lib/player'
 
 # Controls the movement of all of the pieces on the chess board
 class MovementController
-  attr_accessor :squares
+  attr_accessor :squares, :check_mate
 
   def initialize
     @squares = SquareController.new
     @player1 = Player.new(1)
     @player2 = Player.new(2)
+    @check_mate = false
     setup_board
   end
 
@@ -62,7 +63,7 @@ class MovementController
   def update_square(predator_piece)
     target_column = predator_piece.current_pos[0]
     target_row = predator_piece.current_pos[1]
-    
+
     prey_piece = @squares.square(target_column, target_row).piece
 
     determine_victim(predator_piece, prey_piece) unless prey_piece.nil?
@@ -74,7 +75,7 @@ class MovementController
     victim_player = prey_piece.player_num == 1 ? @player1 : @player2
     victim_player.delete_piece(prey_piece)
     puts "Player #{predator_piece.player_num}'s '#{predator_piece.id}' piece just took player "\
-         "#{prey_piece.player_num}'s '#{prey_piece.id}'"
+         "#{prey_piece.player_num}'s '#{prey_piece.id}' piece"
   end
 
   def setup_board

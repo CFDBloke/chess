@@ -19,7 +19,7 @@ class Player
   end
 
   def delete_piece(dead_piece)
-    @pieces[dead_piece.id].delete
+    @pieces.delete(dead_piece.id)
   end
 
   private
