@@ -36,10 +36,11 @@ class Chess
   end
 
   def process_input(player_input, player_num)
-    if player_input.downcase == 'help'
+    case player_input.downcase
+    when 'help'
       display_help
       request_input(player_num)
-    elsif player_input.downcase == 'save'
+    when 'save'
       save_game
       request_input(player_num)
     else
