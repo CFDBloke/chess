@@ -28,7 +28,7 @@ class MovementController
 
     return :no_move unless move_legal?(piece_to_move, parsed_input[1])
 
-    process_input(piece_to_move, target_pos)
+    process_input(piece_to_move, parsed_input[1])
   end
 
   # private

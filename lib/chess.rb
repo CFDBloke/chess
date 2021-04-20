@@ -50,10 +50,9 @@ class Chess
 
   def make_move(player_input, player_num)
     move_status = @chess_board.movement_controller.move_piece(player_num, player_input)
-    p move_status
     case move_status
-    when :no_input
-      repeat_input(player_num)
+    when :no_input, :no_piece
+      repeat_input(player_num, move_status)
     when :no_move
       request_input(player_num)
     else
@@ -61,8 +60,12 @@ class Chess
     end
   end
 
-  def repeat_input(player_num)
-    puts 'Input not recognized, please try again'
+  def repeat_input(player_num, move_status)
+    if move_status == :no_input
+      puts 'Input not recognized, please try again'
+    else
+      puts 'That piece doesn\'t exist, please try again'
+    end
     request_input(player_num)
   end
 end

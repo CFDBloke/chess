@@ -23,8 +23,7 @@ class Player
   end
 
   def piece_exists?(piece_id)
-    # write tests for this method
-    @pieces.any?(piece_id)
+    @pieces.any? { |key, _piece| key == piece_id }
   end
 
   private
