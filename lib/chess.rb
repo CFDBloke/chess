@@ -56,6 +56,7 @@ class Chess
     when :no_move
       request_input(player_num)
     else
+      @chess_board.movement_controller.find_possible_moves
       @chess_board.draw
     end
   end

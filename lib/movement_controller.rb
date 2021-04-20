@@ -2,6 +2,7 @@
 
 require_relative '../lib/square_controller'
 require_relative '../lib/player'
+require_relative '../lib/piece'
 
 INPUT_FORMAT = /[bknpqrBKNPQR][1-8]?([,\s]{1}|,\s)[1-8]([,\s]{1}|,\s)[1-8]/x.freeze
 
@@ -15,6 +16,7 @@ class MovementController
     @player2 = Player.new(2)
     @check_mate = false
     setup_board
+    find_possible_moves
   end
 
   def move_piece(player_num, input_string)
@@ -29,6 +31,17 @@ class MovementController
     return :no_move unless move_legal?(piece_to_move, parsed_input[1])
 
     process_input(piece_to_move, parsed_input[1])
+  end
+
+  def find_possible_moves
+    player_array = [@player1, @player2]
+    player_array.each do |player|
+      player.pieces.each do |piece_ref|
+        piece = @squares.square(piece_ref[1].current_pos[0], piece_ref[1].current_pos[1]).piece
+
+        piece.determine_next_moves(@squares)
+      end
+    end
   end
 
   # private

@@ -2,7 +2,7 @@
 
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
-  attr_reader :player_num
+  attr_reader :player_num, :next_moves
   attr_accessor :adjacents, :current_pos
 
   def initialize(player_num, color, piece_num, start_pos, can_jump)
@@ -11,10 +11,18 @@ class Piece
     @can_jump = can_jump
     @current_pos = start_pos
     @piece_num = piece_num
+    @next_moves = []
   end
 
   def color_code
     @color == :white ? 39 : 30
+  end
+
+  def determine_next_moves(squares)
+    @next_moves = []
+    squares.square_array.each do |square|
+      @next_moves.push([square.column, square.row]) if move_to(square.column, square.row, squares) == :allow_move
+    end
   end
 
   # protected
