@@ -18,9 +18,11 @@ class MovementController
   end
 
   def move_piece(player_num, input_string)
-    return :no_move unless input_legal?(player_num, input_string)
+    return :no_input unless valid_input?(input_string)
 
     parsed_input = parse_input(input_string)
+
+    return :no_piece unless real_piece?(player_num, parsed_input[0])
 
     piece_to_move = get_piece(player_num, parsed_input[0])
 
@@ -100,14 +102,14 @@ class MovementController
     player.pieces[piece_id]
   end
 
-  def input_legal?(player_num, input_string)
-    piece_type = input_string[0].upcase
-    piece_num = input_string[1]
+  def valid_input?(input_string)
+    input_string.match?(INPUT_FORMAT)
+  end
+
+  def real_piece?(player_num, piece_id)
     moving_player = player_num == 1 ? @player1 : @player2
 
-    return false unless moving_player.piece_exists?(piece_type, piece_num)
-
-    input_string.match?(INPUT_FORMAT)
+    moving_player.piece_exists?(piece_id)
   end
 
   def parse_input(input_string)

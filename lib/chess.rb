@@ -50,7 +50,20 @@ class Chess
 
   def make_move(player_input, player_num)
     move_status = @chess_board.movement_controller.move_piece(player_num, player_input)
-    move_status == :no_move ? request_input(player_num) : @chess_board.draw
+    p move_status
+    case move_status
+    when :no_input
+      repeat_input(player_num)
+    when :no_move
+      request_input(player_num)
+    else
+      @chess_board.draw
+    end
+  end
+
+  def repeat_input(player_num)
+    puts 'Input not recognized, please try again'
+    request_input(player_num)
   end
 end
 

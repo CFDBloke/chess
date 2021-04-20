@@ -22,10 +22,9 @@ class Player
     @pieces.delete(dead_piece.id)
   end
 
-  def piece_exists?(piece_id, piece_num)
-    piece_id_single = %w[K Q]
-    piece_to_find = piece_id_single.any?(piece_id) ? piece_id : "#{piece_id}#{piece_num}"
-    @pieces.any?(piece_to_find)
+  def piece_exists?(piece_id)
+    # write tests for this method
+    @pieces.any?(piece_id)
   end
 
   private
