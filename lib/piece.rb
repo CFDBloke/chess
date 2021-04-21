@@ -2,8 +2,8 @@
 
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
-  attr_reader :player_num, :next_moves
-  attr_accessor :adjacents, :current_pos
+  attr_reader :player_num
+  attr_accessor :adjacents, :current_pos, :next_moves
 
   def initialize(player_num, color, piece_num, start_pos, can_jump)
     @player_num = player_num
@@ -116,6 +116,7 @@ class Piece
     direction_def = { North: [0, -1], South: [0, 1], East: [1, 0], West: [-1, 0],
                       NorthEast: [1, -1], SouthEast: [1, 1], NorthWest: [-1, -1], SouthWest: [-1, 1] }
     path_direction = direction_def[direction]
+
     path = []
     extract_path(target_column, target_row, path_direction, @current_pos, path)
   end
@@ -142,10 +143,5 @@ class Piece
     else
       :SouthWest
     end
-  end
-
-  def find_adjacents(column, row)
-    adjacents = initial_adjacents(column, row)
-    adjacents.select { |position| position[0].between?(1, 8) && position[1].between?(1, 8) }
   end
 end

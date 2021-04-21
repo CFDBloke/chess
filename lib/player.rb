@@ -26,6 +26,16 @@ class Player
     @pieces.any? { |key, _piece| key == piece_id }
   end
 
+  def opponent_check?(opposing_king_pos)
+    threats = []
+    @pieces.each do |_key, piece|
+      piece.next_moves.each do |move|
+        opposing_king_pos == move ? threats.push(move) : threats
+      end
+    end
+    !threats.empty?
+  end
+
   private
 
   def generate_pieces
