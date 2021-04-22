@@ -8,7 +8,7 @@ INPUT_FORMAT = /[bknpqrBKNPQR][1-8]?([,\s]{1}|,\s)[1-8]([,\s]{1}|,\s)[1-8]/x.fre
 
 # Controls the movement of all of the pieces on the chess board
 class MovementController
-  attr_accessor :squares, :check_mate
+  attr_accessor :squares, :check_mate, :player1, :player2
 
   def initialize
     @squares = SquareController.new
@@ -48,6 +48,7 @@ class MovementController
     defensive_player = player_num == 1 ? @player1 : @player2
     aggresive_player = player_num == 1 ? @player2 : @player1
 
+    defensive_player.pieces['K'].current_pos
     aggresive_player.opponent_check?(defensive_player.pieces['K'].current_pos)
   end
 

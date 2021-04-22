@@ -90,4 +90,24 @@ describe MovementController do
       end
     end
   end
+
+  describe '#in_check?' do
+    let(:player1) { movement_controller.player1 }
+    let(:player2) { movement_controller.player2 }
+    let(:player2_king) { player2.pieces['K'] }
+    let(:player1_knight) { player1.pieces['N1'] }
+    context 'when the opponents king is not threatened by one of your players' do
+      it 'returns false' do
+        expect(movement_controller.in_check?(2)).to be(false)
+      end
+    end
+
+    context 'when the opponents king is threatened by one of your players' do
+      it 'returns true' do
+        player2_king.current_pos = [6, 6]
+        player1_knight.next_moves = [[6, 6], [8, 6]]
+        expect(movement_controller.in_check?(2)).to be(true)
+      end
+    end
+  end
 end

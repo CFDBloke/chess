@@ -58,7 +58,8 @@ class Chess
     else
       @chess_board.movement_controller.find_possible_moves
 
-      
+      current_player_check = @chess_board.movement_controller.in_check?(player_num)
+      p current_player_check
       # Place check here to determine if either kings are in check
       # If the current players king is in check then reverse the move as it is illegal
       # If the opposing player is in check then check opposing players move options
