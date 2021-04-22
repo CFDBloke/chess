@@ -3,7 +3,7 @@
 # A generic playing piece. All other piece types inherit from this piece
 class Piece
   attr_reader :player_num
-  attr_accessor :adjacents, :current_pos, :next_moves
+  attr_accessor :adjacents, :current_pos, :next_moves, :last_pos
 
   def initialize(player_num, color, piece_num, start_pos, can_jump)
     @player_num = player_num
@@ -11,6 +11,7 @@ class Piece
     @can_jump = can_jump
     @current_pos = start_pos
     @piece_num = piece_num
+    @last_pos = []
     @next_moves = []
   end
 

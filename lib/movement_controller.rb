@@ -4,8 +4,6 @@ require_relative '../lib/square_controller'
 require_relative '../lib/player'
 require_relative '../lib/piece'
 
-INPUT_FORMAT = /[bknpqrBKNPQR][1-8]?([,\s]{1}|,\s)[1-8]([,\s]{1}|,\s)[1-8]/x.freeze
-
 # Controls the movement of all of the pieces on the chess board
 class MovementController
   attr_accessor :squares, :check_mate, :player1, :player2
@@ -19,18 +17,14 @@ class MovementController
     find_possible_moves
   end
 
-  def move_piece(player_num, input_string)
-    return :no_input unless valid_input?(input_string)
+  def move_piece(piece_id, target_pos, player_num)
+    return :no_piece unless real_piece?(player_num, piece_id)
 
-    parsed_input = parse_input(input_string)
+    piece_to_move = get_piece(player_num, piece_id)
 
-    return :no_piece unless real_piece?(player_num, parsed_input[0])
+    return :no_move unless move_legal?(piece_to_move, target_pos)
 
-    piece_to_move = get_piece(player_num, parsed_input[0])
-
-    return :no_move unless move_legal?(piece_to_move, parsed_input[1])
-
-    process_input(piece_to_move, parsed_input[1])
+    process_input(piece_to_move, target_pos)
   end
 
   def find_possible_moves
@@ -57,6 +51,7 @@ class MovementController
   def process_input(piece_to_move, target_pos)
     clear_square(piece_to_move.current_pos)
 
+    piece_to_move.last_pos = piece_to_move.current_pos
     piece_to_move.current_pos = target_pos
 
     update_square(piece_to_move)
@@ -123,21 +118,9 @@ class MovementController
     player.pieces[piece_id]
   end
 
-  def valid_input?(input_string)
-    input_string.match?(INPUT_FORMAT)
-  end
-
   def real_piece?(player_num, piece_id)
     moving_player = player_num == 1 ? @player1 : @player2
 
     moving_player.piece_exists?(piece_id)
-  end
-
-  def parse_input(input_string)
-    input_array = input_string.split(/,\s|,|\s/)
-
-    target_pos = [input_array[1].to_i, input_array[2].to_i]
-
-    [input_array[0], target_pos]
   end
 end
