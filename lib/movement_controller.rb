@@ -44,6 +44,13 @@ class MovementController
     end
   end
 
+  def in_check?(player_num)
+    defensive_player = player_num == 1 ? @player1 : @player2
+    aggresive_player = player_num == 1 ? @player2 : @player1
+
+    aggresive_player.opponent_check?(defensive_player.pieces['K'].current_pos)
+  end
+
   # private
 
   def process_input(piece_to_move, target_pos)
