@@ -45,10 +45,25 @@ class MovementController
 
   def in_check?(player_num)
     defensive_player = player_num == 1 ? @player1 : @player2
-    aggresive_player = player_num == 1 ? @player2 : @player1
+    aggressive_player = player_num == 1 ? @player2 : @player1
 
     defensive_player.pieces['K'].current_pos
-    aggresive_player.opponent_check?(defensive_player.pieces['K'].current_pos)
+    aggressive_player.opponent_check?(defensive_player.pieces['K'].current_pos)
+  end
+
+  def check_mate?(player_num)
+    player = player_num == 1 ? @player1 : @player2
+
+    player.pieces.each do |key, piece|
+      piece.next_moves.each do |possible_move|
+        move_piece(key, possible_move, player_num)
+        still_in_check = in_check?(player_num)
+        return_piece(key, player_num)
+        return false unless still_in_check
+      end
+    end
+
+    true
   end
 
   # private

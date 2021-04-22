@@ -69,13 +69,24 @@ class Chess
       current_player_check = @chess_board.movement_controller.in_check?(player_num)
 
       if current_player_check
-        puts 'That move is not allowed as it would put your own king in check, please try again'
+        puts 'That move is not allowed as it would leave your own king in check, please try again'
         @chess_board.movement_controller.return_piece(piece_id, player_num)
         request_input(player_num)
         return
       end
 
       opposing_player_check = @chess_board.movement_controller.in_check?(other_player(player_num))
+
+      in_check_mate = @chess_board.movement_controller.check_mate?(other_player(player_num))
+
+      if opposing_player_check && !in_check_mate
+        puts 'CHECK!!'.colorize(33).colorize(1)
+      elsif in_check_mate
+        puts 'CHECK MATE!!!'.colorize(31).colorize(1)
+        puts "Sorry Player #{other_player(player_num)}, you lose!!"
+        @chess_board.movement_controller.check_mate = true
+      end
+
       # If the opposing player is in check then check opposing players move options
       # If the opposing player can move out of check then declare check and continue play
       # If the oppoing player cannot move out of check then declare check mate
