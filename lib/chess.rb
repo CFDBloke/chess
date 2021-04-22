@@ -69,13 +69,13 @@ class Chess
       current_player_check = @chess_board.movement_controller.in_check?(player_num)
 
       if current_player_check
-        puts 'That move is not allowed as it would put your king own king in check, please try again'
+        puts 'That move is not allowed as it would put your own king in check, please try again'
         @chess_board.movement_controller.return_piece(piece_id, player_num)
         request_input(player_num)
         return
       end
-      # Place check here to determine if either kings are in check
-      # If the current players king is in check then reverse the move as it is illegal
+
+      opposing_player_check = @chess_board.movement_controller.in_check?(other_player(player_num))
       # If the opposing player is in check then check opposing players move options
       # If the opposing player can move out of check then declare check and continue play
       # If the oppoing player cannot move out of check then declare check mate
@@ -102,6 +102,10 @@ class Chess
 
   def valid_input?(input_string)
     input_string.match?(INPUT_FORMAT)
+  end
+
+  def other_player(player_num)
+    player_num == 1 ? 2 : 1
   end
 end
 
