@@ -27,6 +27,11 @@ class MovementController
     process_input(piece_to_move, target_pos)
   end
 
+  def return_piece(piece_id, player_num)
+    piece_to_return = get_piece(player_num, piece_id)
+    move_piece(piece_id, piece_to_return.last_pos, player_num)
+  end
+
   def find_possible_moves
     player_array = [@player1, @player2]
     player_array.each do |player|

@@ -46,9 +46,12 @@ class Chess
       save_game
       request_input(player_num)
     else
-      repeat_input unless valid_input?(input_string)
+      unless valid_input?(player_input)
+        repeat_input(player_num, :no_move)
+        return
+      end
 
-      parsed_input = parse_input(input_string)
+      parsed_input = parse_input(player_input)
       make_move(parsed_input[0], parsed_input[1], player_num)
     end
   end
@@ -67,7 +70,7 @@ class Chess
 
       if current_player_check
         puts 'That move is not allowed as it would put your king own king in check, please try again'
-        @chess_board.movement_controller.move_piece(player_num, "")
+        @chess_board.movement_controller.return_piece(piece_id, player_num)
         request_input(player_num)
         return
       end
