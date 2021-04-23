@@ -5,7 +5,7 @@ require_relative '../lib/string'
 
 # The pawn playing piece
 class Pawn < Piece
-  attr_accessor :id, :piece_hash, :first_move
+  attr_accessor :id, :piece_hash, :first_move, :test_move
 
   def initialize(player_num, color, piece_num, start_pos, can_jump)
     super(player_num, color, piece_num, start_pos, can_jump)

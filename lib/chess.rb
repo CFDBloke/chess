@@ -87,6 +87,7 @@ class Chess
         @chess_board.movement_controller.check_mate = true
       end
 
+      @chess_board.movement_controller.toggle_first_move(piece_id, player_num)
       # If the opposing player is in check then check opposing players move options
       # If the opposing player can move out of check then declare check and continue play
       # If the oppoing player cannot move out of check then declare check mate
@@ -117,6 +118,10 @@ class Chess
 
   def other_player(player_num)
     player_num == 1 ? 2 : 1
+  end
+
+  def current_player(player_num)
+    player_num == 1 ? 1 : 2
   end
 end
 

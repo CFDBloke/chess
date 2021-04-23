@@ -47,8 +47,6 @@ class Piece
     move_checks2 = move_checks2(target_column, target_row, squares)
     return move_checks2 unless move_checks2 == :allow_move
 
-    @first_move = false if instance_of?(Pawn)
-
     :allow_move
   end
 
