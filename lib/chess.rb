@@ -28,7 +28,7 @@ class Chess
   def execute_gameplay
     until @chess_board.movement_controller.check_mate
       request_input(1)
-      request_input(2)
+      request_input(2) unless @chess_board.movement_controller.check_mate
     end
   end
 
@@ -79,6 +79,8 @@ class Chess
 
       in_check_mate = @chess_board.movement_controller.check_mate?(other_player(player_num))
 
+      @chess_board.draw
+
       if opposing_player_check && !in_check_mate
         puts 'CHECK!!'.colorize(33).colorize(1)
       elsif in_check_mate
@@ -88,10 +90,6 @@ class Chess
       end
 
       @chess_board.movement_controller.toggle_first_move(piece_id, player_num)
-      # If the opposing player is in check then check opposing players move options
-      # If the opposing player can move out of check then declare check and continue play
-      # If the oppoing player cannot move out of check then declare check mate
-      @chess_board.draw
     end
   end
 

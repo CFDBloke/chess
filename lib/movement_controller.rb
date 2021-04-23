@@ -22,7 +22,7 @@ class MovementController
 
   def return_piece(piece_id, player_num)
     piece_to_return = get_piece(player_num, piece_id)
-    move_piece(piece_id, piece_to_return.last_pos, player_num, false)
+    reset_piece(piece_to_return)
   end
 
   def find_possible_moves
