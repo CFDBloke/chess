@@ -7,7 +7,7 @@ require_relative '../lib/queen'
 require_relative '../lib/square_controller'
 
 describe Piece do
-  subject(:player1_piece) { Queen.new(1, :white, 1, [4, 8]) }
+  subject(:player1_piece) { Queen.new(1, :white, 1, [4, 8], false) }
   let(:squares) { SquareController.new }
 
   context 'when a queen is created' do
@@ -28,7 +28,7 @@ describe Piece do
     context 'when the target square already has a friendly piece on it' do
       target_column = 1
       target_row = 8
-      let(:friendly_piece) { Queen.new(1, :white, 1, [target_column, target_row]) }
+      let(:friendly_piece) { Queen.new(1, :white, 1, [target_column, target_row], false) }
 
       before do
         squares.square(target_column, target_row).piece = friendly_piece
@@ -42,7 +42,7 @@ describe Piece do
     context 'when the target square already has an unfriendly piece on it' do
       target_column = 1
       target_row = 8
-      let(:unfriendly_piece) { Queen.new(2, :black, 1, [target_column, target_row]) }
+      let(:unfriendly_piece) { Queen.new(2, :black, 1, [target_column, target_row], false) }
 
       before do
         squares.square(target_column, target_row).piece = unfriendly_piece
@@ -65,7 +65,7 @@ describe Piece do
     end
 
     context 'when the piece is moving down the board' do
-      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1]) }
+      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1], false) }
       target_column = 4
       target_row = 4
 
@@ -102,7 +102,7 @@ describe Piece do
     end
 
     context 'when the piece is moving across the board diagonally to the right and downwards' do
-      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1]) }
+      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1], false) }
       target_column = 8
       target_row = 5
 
@@ -121,7 +121,7 @@ describe Piece do
     end
 
     context 'when the piece is moving across the board diagonally to the left and downwards' do
-      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1]) }
+      subject(:player2_piece) { Queen.new(2, :black, 1, [4, 1], false) }
       target_column = 1
       target_row = 4
 
