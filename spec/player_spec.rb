@@ -6,7 +6,7 @@ require_relative '../lib/player'
 require_relative '../lib/knight'
 
 describe Player do
-  subject(:player1) { described_class.new(1)}
+  subject(:player1) { described_class.new(1) }
   let(:player1_knight) { player1.pieces['N2'] }
 
   it 'has been instantiated' do

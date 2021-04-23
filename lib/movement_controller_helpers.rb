@@ -34,17 +34,29 @@ module MovementControllerHelpers
   end
 
   def move_error(move_status)
+    error_messages1 = %i[invalid no_axis too_far friendly]
+
+    puts error_messages1.any?(move_status) ? errors1(move_status) : errors2(move_status)
+  end
+
+  def errors1(move_status)
     error_messages = {
       invalid: 'You appear to have chosen a target that doesn\'t exist on the game board, please try again',
       no_axis: 'That piece cannot move to that position in one move, please try again',
       too_far: 'That piece cannot move that far, please try again',
-      friendly: 'One of your own pieces is already at that location, please try again',
+      friendly: 'One of your own pieces is already at that location, please try again'
+    }
+    error_messages[move_status]
+  end
+
+  def errors2(move_status)
+    error_messages = {
       obstructed: 'The path to that position is obstructed by one or more other playing pieces, please try again',
       wrong_direction: 'The pawn cannot move backwards, please try again',
       no_attack: 'The pawn cannot attack a piece that is directly ahead of it, please try again',
       no_foe: 'The pawn cannot move diagonally unless it is attacking an opposing piece, please try again'
     }
-    puts error_messages[move_status]
+    error_messages[move_status]
   end
 
   def process_input(piece_to_move, target_pos, for_testing)
