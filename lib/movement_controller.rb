@@ -17,18 +17,18 @@ class MovementController
     find_possible_moves
   end
 
-  def move_piece(piece_id, target_pos, player_num)
+  def move_piece(piece_id, target_pos, player_num, for_testing)
     return :no_piece unless real_piece?(player_num, piece_id)
 
     piece_to_move = get_piece(player_num, piece_id)
     return :no_move unless move_legal?(piece_to_move, target_pos)
 
-    process_input(piece_to_move, target_pos)
+    process_input(piece_to_move, target_pos, for_testing)
   end
 
   def return_piece(piece_id, player_num)
     piece_to_return = get_piece(player_num, piece_id)
-    move_piece(piece_id, piece_to_return.last_pos, player_num)
+    move_piece(piece_id, piece_to_return.last_pos, player_num, false)
   end
 
   def find_possible_moves
@@ -53,14 +53,14 @@ class MovementController
   def check_mate?(player_num)
     player = player_num == 1 ? @player1 : @player2
 
-    player.pieces.each do |key, piece|
+    player.pieces.each do |piece_id, piece|
       piece.next_moves.each do |possible_move|
-        move_piece(key, possible_move, player_num)
+        move_piece(piece_id, possible_move, player_num, true)
         still_in_check = in_check?(player_num)
         @squares.square(piece.current_pos[0], piece.current_pos[1]).piece = nil
         piece.current_pos = piece.last_pos
+        p piece.last_pos
         @squares.square(piece.current_pos[0], piece.current_pos[1]).piece = piece
-        # return_piece(key, player_num)
         return false unless still_in_check
       end
     end
@@ -78,13 +78,13 @@ class MovementController
 
   # private
 
-  def process_input(piece_to_move, target_pos)
-    clear_square(piece_to_move.current_pos)
+  def process_input(piece_to_move, target_pos, for_testing)
+    clear_square(piece_to_move.current_pos) unless for_testing
 
     piece_to_move.last_pos = piece_to_move.current_pos
     piece_to_move.current_pos = target_pos
 
-    update_square(piece_to_move)
+    update_square(piece_to_move) unless for_testing
   end
 
   def move_legal?(piece_to_move, target_pos)

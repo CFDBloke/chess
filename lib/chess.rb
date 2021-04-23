@@ -57,7 +57,7 @@ class Chess
   end
 
   def make_move(piece_id, target_pos, player_num)
-    move_status = @chess_board.movement_controller.move_piece(piece_id, target_pos, player_num)
+    move_status = @chess_board.movement_controller.move_piece(piece_id, target_pos, player_num, false)
     case move_status
     when :no_piece
       repeat_input(player_num, move_status)
